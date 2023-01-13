@@ -35,6 +35,13 @@ def find_word_id(filename, word): # find the id of a word in a language
             return i+1
 
 
+def replace_text(text, startfile, endfile):
+    out = ""
+    for i in text.replace("\n", " ").split(" "):
+        word_id = find_word_id(startfile, i)
+        out += load_words(range(word_id, word_id+1), endfile)[0] + ' '
+    return out[:-1]
+
 def main(seed=None):
     import utils as ut # imports my customized utils module, with a test and timing function. https://GitHub.com/BBernYY/FancyCoding
     import numpy as np
@@ -54,9 +61,12 @@ if __name__ == '__main__': # checks if the code is ran as a file
     from random import randint as rndnt
     import utils as ut
     n = rndnt(0, 1000)
-    open('language.lan', 'wb').write(bytes())
+    # open('language.lan', 'wb').write(bytes())
     ut.timing.start()
-    print(generate_language(['a', 'e', 'i', 'o', 'u'], ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'], '#@#@#@', 1)) # starts the main function
+    # print(generate_language(['a', 'e', 'i', 'o', 'u'], ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'], '#@#@#@', 1)) # starts the main function
+    
     wordid = find_word_id('words.txt', 'hello')
-    print(load_words(range(wordid, wordid+1), 'language.lan'))
+    print(replace_text("hello i am very cool", 'words.txt', 'language.lan'))
+    print(replace_text("", 'language.lan', 'words.txt'))
+    
     ut.timing.stop()
