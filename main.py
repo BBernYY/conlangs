@@ -1,8 +1,11 @@
-def main():
+def main(seed):
     import utils # imports my customized utils module, with a test and timing function. https://GitHub.com/BBernYY/FancyCoding
-    print("hello world!")
+    import numpy as np
+    np.random.seed(seed)
+    
+    
 
 
 
 if __name__ == '__main__': # checks if the code is ran as a file
-    main() # starts the main function
+    main(69) # starts the main function
